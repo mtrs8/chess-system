@@ -1,1 +1,3 @@
-# chess-system
+# Chess-system
+
+##### Author: Matheus Rodrigues 
