@@ -18,11 +18,11 @@ public class UI {
 	}
 	
 	private static void printPiece(ChessPiece piece){
-		if(piece == null)
-			System.out.println("-");
-		else
-			System.out.print(piece);
-		
-		System.out.println(" ");
+		if(piece == null){
+			System.out.print("-");			
+		} else{
+			System.out.print(piece);			
+		}
+		System.out.print(" ");
 	}
 }
