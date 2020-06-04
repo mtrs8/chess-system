@@ -15,6 +15,7 @@ public class ChessMatch {
 		initialSetup();
 	}
 	
+	// Cria uma partida de Xadrez
 	public ChessPiece[][] getPieces(){
 		ChessPiece[][] mat = new ChessPiece[this.board.getRows()][this.board.getColumns()];
 		
@@ -27,6 +28,7 @@ public class ChessMatch {
 		return mat;
 	}
 	
+	// Movimenta as peças dentro do tabuleiro
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
@@ -35,6 +37,7 @@ public class ChessMatch {
 		return (ChessPiece)capturedPiece;
 	}
 	
+	// Sub-Rotina para movimentação das peças
 	private Piece makeMove(Position source, Position target) {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
@@ -42,17 +45,20 @@ public class ChessMatch {
 		return capturedPiece;
 	}
 	
+	// Sub-Rotina para movimentação das peças
 	private void validateSourcePosition(Position position){
 		if(!board.thereIsAPiece(position))
 			throw new ChessException("There is no piece on source position!");
 	}
 	
+	// Faz uma "tradução" entre o modelo padrão e o modelo de matrizes
 	private void placeNewPiece(char column, int row, ChessPiece piece){
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
 	}
 	
+	// Inicializa o tabuleiro com as peças
 	private void initialSetup(){
-		placeNewPiece('b', 6, new Rook(board, Color.WHITE));
+		//placeNewPiece('b', 6, new Rook(board, Color.WHITE));
 		placeNewPiece('e', 8, new King(board, Color.BLACK));
 		placeNewPiece('e', 1, new King(board, Color.WHITE));
 		placeNewPiece('c', 1, new Rook(board, Color.WHITE));

@@ -21,13 +21,15 @@ public class Board {
 		return columns;
 	}
 	
+	// Verifica se a peça está dentro das possibilidades do tabuleiro
 	public Piece piece(int row, int column){
 		if(!positionExists(row, column)){
-			throw new BoardException("Position not on ther board!");
+			throw new BoardException("Position not on the board!");
 		}
 		return pieces[row][column];
 	}
 	
+	// Sobrecarrega o método acima buscando a posição de determinada peça
 	public Piece piece(Position position){
 		if(!positionExists(position))
 			throw new BoardException("Position not on the board!");
@@ -42,6 +44,7 @@ public class Board {
 		piece.position = position;
 	}
 	
+	// Remove uma peça do tabuleiro
 	public Piece removePiece(Position position) {
 		if(!positionExists(position)) throw new BoardException("Position not on the board!");
 		
@@ -53,15 +56,18 @@ public class Board {
 		return aux;
 	}
 	
+	// Verifica a existência da peça no tabuleiro
 	public boolean positionExists(int row, int column){
 		return (row >= 0 && row < rows) 
 				&& (column >= 0 && column < columns);
 	}
 	
+	// Verifica a disponibilidade de uma posição do tabuleiro
 	public boolean positionExists(Position position){
 		return positionExists(position.getRow(), position.getColumn());
 	}
 	
+	// Verifica qual peça está em determinada posição
 	public boolean thereIsAPiece(Position position){
 		if(!positionExists(position))
 			throw new BoardException("Position not on the board!");
