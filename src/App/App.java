@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import Boardgame.BoardException;
 import Chess.ChessMatch;
+import Chess.ChessPiece;
 import Chess.ChessPosition;
 
 public class App {
@@ -16,12 +17,14 @@ public class App {
 			while(true){
 				UI.printBoard(match.getPieces());			
 				System.out.println();
-				System.out.print("Source: ");
+				System.out.print("Source Position: ");
 				ChessPosition source = UI.readChessPosition(sc);
 				
 				System.out.println();
-				System.out.print("Target: ");
+				System.out.print("Target Position: ");
 				ChessPosition target = UI.readChessPosition(sc);
+				
+				ChessPiece capturedPiece = match.performChessMove(source, target);
 			}
 		} catch(BoardException b){
 			b.printStackTrace();
