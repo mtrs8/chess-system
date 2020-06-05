@@ -54,7 +54,21 @@ public class UI {
 		for (int iCont = 0; iCont < pieces.length; iCont++) {
 			System.out.print((8 - iCont) + " ");
 			for (int jCont = 0; jCont < pieces.length; jCont++) {
-				printPiece(pieces[iCont][jCont]);
+				printPiece(pieces[iCont][jCont], false);
+			}
+
+			System.out.println();
+		}
+		System.out.println("  a b c d e f g h");
+	}
+	
+	//Mostra o tabuleiro na tela mudando o background para as posições possíveis
+	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+
+		for (int iCont = 0; iCont < pieces.length; iCont++) {
+			System.out.print((8 - iCont) + " ");
+			for (int jCont = 0; jCont < pieces.length; jCont++) {
+				printPiece(pieces[iCont][jCont], possibleMoves[iCont][jCont]);
 			}
 
 			System.out.println();
@@ -63,9 +77,12 @@ public class UI {
 	}
 	
 	// Mostra as peças na tela
-	private static void printPiece(ChessPiece piece) {
+	private static void printPiece(ChessPiece piece, boolean background) {
+		if(background)
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		
 		if (piece == null) {
-			System.out.print("-");
+			System.out.print("-" + ANSI_RESET);
 		}
         else {
             if (piece.getColor() == Color.WHITE) {
