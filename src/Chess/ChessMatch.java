@@ -1,5 +1,8 @@
 package Chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Boardgame.Board;
 import Boardgame.Piece;
 import Boardgame.Position;
@@ -12,10 +15,15 @@ public class ChessMatch {
 	private Color currentPlayer;
 	private Board board;
 	
+	private List<Piece> piecesOnTheBoard;
+	private List<Piece> capturedPieces;
+	
 	public ChessMatch(){
 		this.board = new Board(8, 8);
 		this.turn = 1;
 		this.currentPlayer = Color.WHITE;
+		this.piecesOnTheBoard = new ArrayList<>();
+		this.capturedPieces = new ArrayList<>();
 		initialSetup();
 	}
 	
@@ -62,6 +70,11 @@ public class ChessMatch {
 		Piece p = board.removePiece(source);
 		Piece capturedPiece = board.removePiece(target);
 		board.placePiece(p, target);
+		
+		if(capturedPiece != null){
+			piecesOnTheBoard.remove(capturedPiece);
+			capturedPieces.add(capturedPiece);
+		}
 		return capturedPiece;
 	}
 	
@@ -90,6 +103,7 @@ public class ChessMatch {
 	// Faz uma "tradução" entre o modelo padrão e o modelo de matrizes
 	private void placeNewPiece(char column, int row, ChessPiece piece){
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		piecesOnTheBoard.add(piece);
 	}
 	
 	// Inicializa o tabuleiro com as peças
