@@ -21,7 +21,7 @@ public class ChessMatch {
 	private List<Piece> capturedPieces;
 	
 	public ChessMatch(){
-		this.check = false;
+		//this.check = false;
 		this.board = new Board(8, 8);
 		this.turn = 1;
 		this.currentPlayer = Color.WHITE;
@@ -41,6 +41,10 @@ public class ChessMatch {
 	
 	public boolean getCheck(){
 		return this.check;
+	}
+	
+	private void setCheck(boolean check){
+		this.check = check;
 	}
 	
 	// Cria uma partida de Xadrez
@@ -73,7 +77,7 @@ public class ChessMatch {
 			undoMove(source, target, capturedPiece);
 			throw new ChessException("You can't put yourself in check!");
 		}
-		check = (testCheck(opponent(currentPlayer))) ? true : false;
+		setCheck((testCheck(opponent(currentPlayer))) ? true : false);
 		nextTurn();
 		return (ChessPiece)capturedPiece;
 	}
@@ -126,15 +130,15 @@ public class ChessMatch {
 	}
 	
 	private Color opponent(Color color){
-		return (color == Color.WHITE)? Color.BLACK : Color.WHITE;
+		return (color == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 	
 	private ChessPiece king(Color color){
 		List<Piece> list = piecesOnTheBoard
 				.stream().filter(x -> ((ChessPiece)x)
-				.getColor()== color).collect(Collectors.toList());
+				.getColor() == color).collect(Collectors.toList());
 		
-		for(Piece p : list) {
+		for(Piece p : list) { 
 			if(p instanceof King){
 				return (ChessPiece) p;
 			}

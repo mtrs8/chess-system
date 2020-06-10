@@ -29,9 +29,6 @@ public class Position {
 		this.setColumn(column);
 	}
 	
-	
-	
-	
 	@Override
 	public String toString(){
 		return row + ", " + column;
